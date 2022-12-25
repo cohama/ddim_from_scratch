@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  ddim_from_scratch:
+    build: .
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+      - type: bind
+        source: ./tensorflow_datasets
+        target: /root/tensorflow_datasets
